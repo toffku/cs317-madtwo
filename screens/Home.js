@@ -1,11 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
+import GlobalStyles from "../global/GlobalStyles";
 
 const Home = () => {
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <SafeAreaView style={GlobalStyles.container}>
+      <View className="border">
+        <Text className="text-gray-50">Home</Text>
+      </View>
+    </SafeAreaView>
   );
 };
 

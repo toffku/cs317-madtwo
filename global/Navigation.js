@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./screens/Home";
-import Workouts from "./screens/Workouts";
+import Home from "../screens/Home";
+import Workouts from "../screens/Workouts";
 
 const Stack = createNativeStackNavigator();
 
@@ -10,7 +10,7 @@ function Navigation() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: true,
+          headerShown: false,
         }}
       >
         <Stack.Screen name="Home" component={Home} />
