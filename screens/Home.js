@@ -10,12 +10,18 @@ const Home = () => {
 
     return (
         <>
+            <View style = {styles.rectangle1}/>
             <SafeAreaView style={styles.container}>
+                <View style={styles.welcome}>
+                    <Text>Welcome Back, Scott!</Text>
+                </View>
                 <View style={styles.navbar}>
                     <TouchableOpacity onPress={() => navigation.navigate('Physical')}>
                         <Image source={require('./photos/heart.png')} style={{ width: 35, height: 35}} />
                     </TouchableOpacity>
-                    <Image source={require('./photos/home.png')} style={{ width: 35, height: 35}} />
+                    <TouchableOpacity onPress={() => navigation.navigate('Password')}>
+                    <Image source={require('./photos/logout.png')} style={{ width: 35, height: 35}} />
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Mental')}>
                         <Image source={require('./photos/brain.png')} style={{ width: 35, height: 35}} />
                     </TouchableOpacity>
@@ -52,6 +58,17 @@ const styles = StyleSheet.create({
         height: 50,
         width: 1000,
         backgroundColor: '#333', // Use backgroundColor instead of color
+    },
+    rectangle1: {
+        justifyContent: 'flex-start',
+        height: 100,
+        width: 1000,
+        backgroundColor: '#333', // Use backgroundColor instead of color
+    },
+    welcome: {
+        flex: 1,
+        justifyContent: 'center', // This will center the text vertically
+        alignItems: 'center', // This will center the text horizontally
     },
 });
 
