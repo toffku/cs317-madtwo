@@ -4,8 +4,8 @@ import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
 import { StyleSheet } from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 
+const Mental = () => {
 
-const Home = () => {
     const navigation = useNavigation()
 
     return (
@@ -13,12 +13,12 @@ const Home = () => {
             <SafeAreaView style={styles.container}>
                 <View style={styles.navbar}>
                     <TouchableOpacity onPress={() => navigation.navigate('Physical')}>
-                        <Image source={require('./photos/heart.png')} style={{ width: 35, height: 35}} />
+                    <Image source={require('./photos/heart.png')} style={{ width: 35, height: 35}} />
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
                     <Image source={require('./photos/home.png')} style={{ width: 35, height: 35}} />
-                    <TouchableOpacity onPress={() => navigation.navigate('Mental')}>
-                        <Image source={require('./photos/brain.png')} style={{ width: 35, height: 35}} />
                     </TouchableOpacity>
+                    <Image source={require('./photos/brain.png')} style={{ width: 35, height: 35}} />
 
                 </View>
             </SafeAreaView>
@@ -55,5 +55,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Home;
+export default Mental;
 
