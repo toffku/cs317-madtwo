@@ -9,14 +9,22 @@ import {
 } from "react-native";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import GlobalStyles from "../GlobalStyles";
 
 const Physical = () => {
   const navigation = useNavigation();
 
   return (
-    <View className="flex-1 items-center justify-center">
-      <Text>Physical Page</Text>
-    </View>
+    <SafeAreaView style={GlobalStyles.darkContainer}>
+      <View className="flex-1 items-center justify-start p-10">
+        <View
+          className="w-full h-20 items-center justify-center rounded-lg"
+          style={GlobalStyles.bgColor}
+        >
+          <Text className="text-white">Physical</Text>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 

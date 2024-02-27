@@ -54,7 +54,13 @@ const Settings = () => {
 
   return (
     <SafeAreaView style={GlobalStyles.darkContainer}>
-      <View className="flex-1 h-full w-full mt-20">
+      <View className="flex-1 h-full w-full">
+        <View className="w-full h-20 items-center justify-center">
+          <Image
+            source={require("../assets/logo.png")}
+            style={{ width: 110, height: 110, resizeMode: "contain" }}
+          />
+        </View>
         {settingsArr.map(({ name, key, icon }) => {
           return (
             <TouchableOpacity
