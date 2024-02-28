@@ -10,6 +10,7 @@ import Welcome from "../screens/Welcome";
 import Login from "../screens/Login";
 import Mental from "../screens/Mental";
 import Physical from "../screens/Physical";
+import Exercises from "../screens/Exercises";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,6 +27,7 @@ function MainStack() {
       <Stack.Screen name="TabNavigation" component={TabNavigation} />
       <Stack.Screen name="Mental" component={Mental} />
       <Stack.Screen name="Physical" component={Physical} />
+      <Stack.Screen name="Exercises" component={Exercises} />
     </Stack.Navigator>
   );
 }
