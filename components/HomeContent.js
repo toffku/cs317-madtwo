@@ -1,7 +1,7 @@
 import React from "react";
 import MapView from "react-native-maps";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import GlobalStyles from "../GlobalStyles";
+import GlobalStyles from "../global/GlobalStyles";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { mapViewDark } from "../constants";

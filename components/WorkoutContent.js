@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Button, Pressable } from "react-native";
 import React from "react";
 import { Touchable } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import GlobalStyles from "../GlobalStyles";
+import GlobalStyles from "../global/GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const WorkoutContent = () => {

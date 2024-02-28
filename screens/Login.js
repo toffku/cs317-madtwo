@@ -8,7 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import React, { useState } from "react";
-import GlobalStyles from "../GlobalStyles";
+import GlobalStyles from "../global/GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const Login = () => {

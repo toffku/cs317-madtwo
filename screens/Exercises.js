@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
-import GlobalStyles from "../GlobalStyles";
+import GlobalStyles from "../global/GlobalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Exercises = () => {

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import GlobalStyles from "../GlobalStyles";
+import GlobalStyles from "../global/GlobalStyles";
 
 const WorkoutStats = () => {
   return (
