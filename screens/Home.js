@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { View, Text, SafeAreaView } from "react-native";
-=======
->>>>>>> scott
 import React from "react";
 import GlobalStyles from "../global/GlobalStyles";
 
@@ -13,18 +9,11 @@ import {
   SafeAreaView,
   StyleSheet,
 } from "react-native";
-import GlobalStyles from "../GlobalStyles";
 import Header from "../components/Header";
 import HomeContent from "../components/HomeContent";
 
 const Home = () => {
   return (
-<<<<<<< HEAD
-    <SafeAreaView style={GlobalStyles.container}>
-      <View className="border">
-        <Text className="text-gray-50">Home</Text>
-      </View>
-=======
     <SafeAreaView style={GlobalStyles.darkContainer}>
       <Image
         source={require("../assets/logo-no-text.png")}
@@ -32,7 +21,6 @@ const Home = () => {
       />
       <Header />
       <HomeContent />
->>>>>>> scott
     </SafeAreaView>
   );
 };
