@@ -19,7 +19,7 @@ const Login = () => {
   let uname = "JFM04";
 
   const handlePress = () => {
-    if (password === pword && username === uname) {
+    if (password === pword && username.trim() === uname) {
       navigation.navigate("TabNavigation");
     }
   };
