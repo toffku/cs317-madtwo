@@ -15,10 +15,10 @@ import HomeContent from "../components/HomeContent";
 const Home = () => {
   return (
     <SafeAreaView style={GlobalStyles.darkContainer}>
-      <Image
+      {/* <Image
         source={require("../assets/logo-no-text.png")}
         style={styles.logo}
-      />
+      /> */}
       <Header />
       <HomeContent />
     </SafeAreaView>

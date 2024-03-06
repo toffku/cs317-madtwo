@@ -11,6 +11,9 @@ import Login from "../screens/Login";
 import Mental from "../screens/Mental";
 import Physical from "../screens/Physical";
 import Exercises from "../screens/Exercises";
+import MapScreen from "../screens/MapScreen";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { themeColor } from "../global/GlobalStyles";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,6 +31,7 @@ function MainStack() {
       <Stack.Screen name="Mental" component={Mental} />
       <Stack.Screen name="Physical" component={Physical} />
       <Stack.Screen name="Exercises" component={Exercises} />
+      <Stack.Screen name="Map" component={MapScreen} />
     </Stack.Navigator>
   );
 }
@@ -56,7 +60,7 @@ function TabNavigation() {
           }
           return <Ionicons name={icon} size={size} color={color} />;
         },
-        tabBarActiveTintColor: "gold",
+        tabBarActiveTintColor: themeColor,
         tabBarLabelStyle: {
           fontSize: 10,
         },

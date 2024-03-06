@@ -11,6 +11,8 @@ import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import GlobalStyles from "../global/GlobalStyles";
 import Feather from "react-native-vector-icons/Feather";
+import Logo from "../components/Logo";
+import FontComponent from "../components/FontComponent";
 
 const Settings = () => {
   const navigation = useNavigation();
@@ -56,10 +58,7 @@ const Settings = () => {
     <SafeAreaView style={GlobalStyles.darkContainer}>
       <View className="flex-1 h-full w-full">
         <View className="w-full h-20 items-center justify-center">
-          <Image
-            source={require("../assets/logo.png")}
-            style={{ width: 110, height: 110, resizeMode: "contain" }}
-          />
+          <Logo logoStyle={GlobalStyles.smallLogo} width={24} height={24} />
         </View>
         {settingsArr.map(({ name, key, icon }) => {
           return (
@@ -68,7 +67,7 @@ const Settings = () => {
               className="w-full h-14 items-center px-10 mt-2 flex-row"
             >
               <Feather name={icon} size={20} color="white" />
-              <Text className="px-4 text-white">{name}</Text>
+              <FontComponent className="px-4 text-white">{name}</FontComponent>
             </TouchableOpacity>
           );
         })}

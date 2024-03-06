@@ -10,6 +10,8 @@ import {
 import React, { useState } from "react";
 import GlobalStyles from "../global/GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import Logo from "../components/Logo";
+import FontComponent from "../components/FontComponent";
 
 const Login = () => {
   const navigation = useNavigation();
@@ -30,10 +32,7 @@ const Login = () => {
           className="w-full h-1/2 p-8 rounded-lg items-center justify-around"
           style={GlobalStyles.bgColor}
         >
-          <Image
-            source={require("../assets/logo.png")}
-            style={{ width: 200, height: 100, resizeMode: "contain" }}
-          />
+          <Logo logoStyle={GlobalStyles.largeLogo} width={50} height={50} />
           <View className="w-full mt-8">
             <TextInput
               style={{
@@ -61,9 +60,12 @@ const Login = () => {
           </View>
           <TouchableOpacity
             onPress={handlePress}
-            className="w-full mt-10 p-2 rounded-lg bg-yellow-500 items-center justify-center"
+            className="w-full mt-10 p-2 rounded-lg items-center justify-center"
+            style={GlobalStyles.themeBg}
           >
-            <Text className="font-semibold text-lg text-white">Login</Text>
+            <FontComponent bold={true} className="text-lg text-white">
+              Login
+            </FontComponent>
           </TouchableOpacity>
         </View>
       </View>

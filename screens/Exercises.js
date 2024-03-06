@@ -11,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import GlobalStyles from "../global/GlobalStyles";
 import Searchbar from "../components/Searchbar";
 import ExerciseList from "../components/ExerciseList";
+import FontComponent from "../components/FontComponent";
 
 const Exercises = () => {
   const [error, setError] = useState(null);
@@ -81,9 +82,9 @@ const Exercises = () => {
   return (
     <SafeAreaView style={GlobalStyles.darkContainer}>
       <View className="w-full h-20 justify-center items-center ">
-        <Text className="text-white font-semibold text-2xl">
+        <FontComponent className="text-white text-2xl" bold={true}>
           Choose an exercise
-        </Text>
+        </FontComponent>
       </View>
       <View className="px-4">
         <Searchbar input={input} setInput={setInput} />
@@ -104,12 +105,12 @@ const Exercises = () => {
         </SafeAreaView>
       ) : input === "" ? (
         <View className="flex-1 p-4 justify-start items-center">
-          <Text className="text-white text-lg font-semibold mt-8">
+          <FontComponent className="text-white text-lg mt-8">
             Type in the search bar to find an exercise
-          </Text>
-          <Text className="text-sm text-white opacity-50">
+          </FontComponent>
+          <FontComponent className="text-sm text-white opacity-50">
             Search for muscles groups, exercises, equipment etc.{" "}
-          </Text>
+          </FontComponent>
         </View>
       ) : (
         showExerciseList && (

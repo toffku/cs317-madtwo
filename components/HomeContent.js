@@ -1,12 +1,12 @@
 import React from "react";
 import MapView from "react-native-maps";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import GlobalStyles from "../global/GlobalStyles";
+import GlobalStyles, { themeColor } from "../global/GlobalStyles";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { mapViewDark } from "../constants";
+
 import { useNavigation } from "@react-navigation/native";
-import Mental from "../screens/Mental";
+import FontComponent from "./FontComponent";
 
 const HomeContent = () => {
   const navigation = useNavigation();
@@ -16,18 +16,29 @@ const HomeContent = () => {
   const handleMental = () => {
     navigation.navigate("Mental");
   };
+  const handleMap = () => {
+    navigation.navigate("Map");
+  };
   return (
     <View className="flex-1 px-5">
       {/* Map */}
-      <View
-        className="w-full h-1/2 rounded-lg mb-4 overflow-hidden"
+      <TouchableOpacity
+        className="w-full h-32 rounded-lg mb-4 p-8 overflow-hidden justify-around items-center"
         style={GlobalStyles.bgColor}
+        onPress={handleMap}
       >
-        <MapView
-          className="w-full h-full rounded-xl shadow-lg"
-          customMapStyle={mapViewDark}
+        <MaterialCommunityIcons
+          name="map-marker-radius"
+          color={themeColor}
+          size={50}
         />
-      </View>
+        <FontComponent
+          className="mt-8 text-[12px]"
+          style={GlobalStyles.themeText}
+        >
+          Find a gym near me
+        </FontComponent>
+      </TouchableOpacity>
       {/* Sections */}
       <View className="w-full flex-row h-32 justify-between">
         <TouchableOpacity
@@ -35,14 +46,27 @@ const HomeContent = () => {
           style={GlobalStyles.bgColor}
           onPress={handlePhysical}
         >
-          <FontAwesome name="heartbeat" color="gold" size={60} />
+          <FontAwesome name="heartbeat" color={themeColor} size={50} />
+          <FontComponent
+            className="text-[12px] mt-2"
+            style={GlobalStyles.themeText}
+          >
+            Physical
+          </FontComponent>
         </TouchableOpacity>
         <TouchableOpacity
           className="w-[48%] h-full rounded-lg items-center justify-center"
           style={GlobalStyles.bgColor}
           onPress={handleMental}
         >
-          <MaterialCommunityIcons name="meditation" color="gold" size={60} />
+          <MaterialCommunityIcons
+            name="meditation"
+            color={themeColor}
+            size={60}
+          />
+          <FontComponent className="text-[12px]" style={GlobalStyles.themeText}>
+            Mindfulness
+          </FontComponent>
         </TouchableOpacity>
       </View>
     </View>

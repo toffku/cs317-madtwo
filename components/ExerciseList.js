@@ -1,8 +1,11 @@
 import React from "react";
 import { FlatList, TouchableOpacity, Text } from "react-native";
 import GlobalStyles from "../global/GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
+import FontComponent from "./FontComponent";
 
 const ExerciseList = ({ input, data }) => {
+  const navigation = useNavigation();
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
@@ -30,14 +33,25 @@ const ExerciseList = ({ input, data }) => {
           <TouchableOpacity
             className="p-5 justify-center rounded-lg mb-4 flex-1"
             style={GlobalStyles.bgColor}
+            onPress={() =>
+              navigation.navigate("TabNavigation", {
+                screen: "Workout",
+                params: { item: item },
+              })
+            }
           >
-            <Text className="text-white text-xl font-bold">{item.name}</Text>
-            <Text className={`font-semibold mt-1 ${difficultyColorClass}`}>
+            <FontComponent className="text-white text-xl" bold={true}>
+              {item.name}
+            </FontComponent>
+            <FontComponent
+              className={`mt-1 ${difficultyColorClass}`}
+              bold={true}
+            >
               {level}
-            </Text>
-            <Text className="text-white opacity-50 my-2">
+            </FontComponent>
+            <FontComponent className="text-white opacity-50 my-2">
               {item.muscle.replace(/_/g, " ")}
-            </Text>
+            </FontComponent>
           </TouchableOpacity>
         );
       }}
