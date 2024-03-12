@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, Linking } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps-osmdroid";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import * as Location from 'expo-location';
+import { useNavigation } from "@react-navigation/native";
 import GlobalStyles from "../global/GlobalStyles";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { mapViewDark } from "../constants";
-import { useNavigation } from "@react-navigation/native";
-import * as Location from 'expo-location';
 
 const HomeContent = () => {
   const navigation = useNavigation();
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [destination, setDestination] = useState(null);
+  const [destination, setDestination] = useState(null); // Ensure this state is defined if you're using it
   const [gyms, setGyms] = useState([]);
 
   useEffect(() => {
@@ -30,30 +29,42 @@ const HomeContent = () => {
     setCurrentLocation(location.coords);
   };
 
-  // Function to fetch gym locations
   const fetchGyms = () => {
     // Simulated array of gym locations for demonstration
     const gymLocations = [
       { latitude: 55.806911, longitude: -4.293141, name: "PureGym Giffnock" },
       { latitude: 55.867916, longitude: -4.255486, name: "PureGym Glasgow Robroyston" },
-      { latitude: 55.854832, longitude: -4.240996, name: "PureGym Glasgow Bath Street" }, 
+      { latitude: 55.854832, longitude: -4.240996, name: "PureGym Glasgow Bath Street" },
     ];
     setGyms(gymLocations);
   };
 
+  const handleDirections = (latitude, longitude) => {
+    const scheme = Platform.select({
+      ios: "maps:0,0?q=",
+      android: "geo:0,0?q="
+    });
+    const latLng = `${latitude},${longitude}`;
+    const label = "Gym Location";
+    const url = Platform.select({
+      ios: `${scheme}${label}@${latLng}`,
+      android: `${scheme}${latLng}(${label})`
+    });
+
+    Linking.openURL(url).catch(err => console.error("An error occurred", err));
+  };
+
+  // Define handlePhysical function
   const handlePhysical = () => {
     navigation.navigate("Physical");
   };
 
+  // Define handleMental function
   const handleMental = () => {
     navigation.navigate("Mental");
   };
 
-  const handleDirections = (latitude, longitude) => {
-    setDestination({latitude, longitude});
-  };
-
-  return (
+return (
     <View className="flex-1 px-5">
       {/* Map */}
       <View
@@ -63,7 +74,7 @@ const HomeContent = () => {
         {currentLocation && (
           <MapView
             className="w-full h-full rounded-xl shadow-lg"
-            customMapStyle={mapViewDark}
+            //customMapStyle={mapViewDark}
             initialRegion={{
               latitude: currentLocation.latitude,
               longitude: currentLocation.longitude,
@@ -129,3 +140,4 @@ const HomeContent = () => {
 };
 
 export default HomeContent;
+
