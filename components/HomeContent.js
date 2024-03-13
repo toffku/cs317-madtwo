@@ -10,65 +10,44 @@ import FontComponent from "./FontComponent";
 
 const HomeContent = () => {
   const navigation = useNavigation();
-  const handlePhysical = () => {
-    navigation.navigate("Physical");
+  const handleTools = () => {
+    navigation.navigate("Tools");
   };
-  const handleMental = () => {
-    navigation.navigate("Mental");
-  };
+
   const handleMap = () => {
     navigation.navigate("Map");
   };
   return (
-    <View className="flex-1 px-5">
+    <View className="flex-1 px-5  justify-end">
       {/* Map */}
       <TouchableOpacity
-        className="w-full h-32 rounded-lg mb-4 p-8 overflow-hidden justify-around items-center"
+        className="w-full h-24 rounded-lg mb-4 p-3 justify-around items-center"
         style={GlobalStyles.bgColor}
         onPress={handleMap}
       >
         <MaterialCommunityIcons
           name="map-marker-radius"
           color={themeColor}
-          size={50}
+          size={40}
         />
-        <FontComponent
-          className="mt-8 text-[12px]"
-          style={GlobalStyles.themeText}
-        >
+        <FontComponent className=" text-[12px]" style={GlobalStyles.themeText}>
           Find a gym near me
         </FontComponent>
       </TouchableOpacity>
-      {/* Sections */}
-      <View className="w-full flex-row h-32 justify-between">
-        <TouchableOpacity
-          className="w-[48%] h-full rounded-lg items-center justify-center"
-          style={GlobalStyles.bgColor}
-          onPress={handlePhysical}
-        >
-          <FontAwesome name="heartbeat" color={themeColor} size={50} />
-          <FontComponent
-            className="text-[12px] mt-2"
-            style={GlobalStyles.themeText}
-          >
-            Physical
-          </FontComponent>
-        </TouchableOpacity>
-        <TouchableOpacity
-          className="w-[48%] h-full rounded-lg items-center justify-center"
-          style={GlobalStyles.bgColor}
-          onPress={handleMental}
-        >
-          <MaterialCommunityIcons
-            name="meditation"
-            color={themeColor}
-            size={60}
-          />
-          <FontComponent className="text-[12px]" style={GlobalStyles.themeText}>
-            Mindfulness
-          </FontComponent>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        className="w-full h-24 rounded-lg mb-4 p-3 overflow-hidden justify-around items-center"
+        style={GlobalStyles.bgColor}
+        onPress={handleTools}
+      >
+        <MaterialCommunityIcons
+          name="hammer-wrench"
+          color={themeColor}
+          size={40}
+        />
+        <FontComponent className=" text-[12px]" style={GlobalStyles.themeText}>
+          Tools
+        </FontComponent>
+      </TouchableOpacity>
     </View>
   );
 };

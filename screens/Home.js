@@ -11,15 +11,15 @@ import {
 } from "react-native";
 import Header from "../components/Header";
 import HomeContent from "../components/HomeContent";
+import { useRoute } from "@react-navigation/native";
 
 const Home = () => {
+  const route = useRoute();
+  const workoutCount = route.params?.workouts;
+  const name = route.params?.username;
   return (
     <SafeAreaView style={GlobalStyles.darkContainer}>
-      {/* <Image
-        source={require("../assets/logo-no-text.png")}
-        style={styles.logo}
-      /> */}
-      <Header />
+      <Header workoutCount={workoutCount} name={name} />
       <HomeContent />
     </SafeAreaView>
   );

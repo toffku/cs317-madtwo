@@ -2,6 +2,8 @@ import { Platform, StyleSheet } from "react-native";
 
 export const themeColor = "#cd35ab";
 
+//
+
 export default StyleSheet.create({
   darkContainer: {
     backgroundColor: "#111",

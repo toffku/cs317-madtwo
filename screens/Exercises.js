@@ -105,7 +105,7 @@ const Exercises = () => {
         </SafeAreaView>
       ) : input === "" ? (
         <View className="flex-1 p-4 justify-start items-center">
-          <FontComponent className="text-white text-lg mt-8">
+          <FontComponent className="text-white text-lg mt-8 px-1">
             Type in the search bar to find an exercise
           </FontComponent>
           <FontComponent className="text-sm text-white opacity-50">

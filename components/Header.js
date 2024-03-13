@@ -7,7 +7,7 @@ import Logo from "./Logo";
 import FontComponent from "./FontComponent";
 import WorkoutCounter from "./WorkoutCounter";
 
-const Header = () => {
+const Header = ({ workoutCount, name }) => {
   return (
     <View className="flex-1 mb-36">
       {/* Logo */}
@@ -25,10 +25,10 @@ const Header = () => {
             bold={true}
             style={GlobalStyles.themeText}
           >
-            Scott
+            {name}
           </FontComponent>
         </View>
-        <WorkoutCounter />
+        <WorkoutCounter workoutCount={workoutCount} />
       </View>
     </View>
   );

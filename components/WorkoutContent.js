@@ -5,6 +5,7 @@ import {
   Button,
   Pressable,
   ScrollView,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -13,12 +14,18 @@ import { useNavigation } from "@react-navigation/native";
 import WorkoutItem from "./WorkoutItem";
 import FontComponent from "./FontComponent";
 
-const WorkoutContent = ({ item, handleSets, handleVolume }) => {
+const WorkoutContent = ({ item, getData, startTimer, handleEndWorkout }) => {
   const navigation = useNavigation();
   const [exercises, setExercises] = useState([]);
+  const [exerciseData, setExerciseData] = useState([]);
+  const [count, setCount] = useState(0);
 
   const addItemToExercises = (item) => {
     setExercises([...exercises, item]);
+    setCount(count + 1);
+    if (count === 0) {
+      startTimer();
+    }
   };
 
   useEffect(() => {
@@ -29,6 +36,42 @@ const WorkoutContent = ({ item, handleSets, handleVolume }) => {
 
   const handleAddExercise = () => {
     navigation.navigate("Exercises");
+  };
+
+  const handleDeleteItem = (index) => {
+    const updatedExercises = [...exercises];
+    updatedExercises.splice(index, 1);
+    setExercises(updatedExercises);
+
+    const updatedExerciseData = [...exerciseData];
+    updatedExerciseData.splice(index, 1);
+    setExerciseData(updatedExerciseData);
+  };
+
+  const updateExerciseData = (index, data) => {
+    const updatedData = [...exerciseData];
+    updatedData[index] = data;
+    setExerciseData(updatedData);
+  };
+
+  useEffect(() => {
+    getData(exerciseData);
+  }, [exerciseData]);
+
+  const endWorkoutAlert = () => {
+    Alert.alert("", "Are you sure you want end your workout?", [
+      {
+        text: "End Workout",
+        onPress: () => {
+          handleEndWorkout(); // Call the handleEndWorkout function
+          setExercises([]); // Clear the exercises array
+        },
+      },
+      {
+        text: "Cancel",
+        onPress: () => console.log("Alert cancelled"),
+      },
+    ]);
   };
 
   return (
@@ -47,13 +90,14 @@ const WorkoutContent = ({ item, handleSets, handleVolume }) => {
             </View>
           </View>
         ) : (
-          exercises.map((x, key) => {
+          exercises.map((x, index) => {
             return (
               <WorkoutItem
                 exercise={x}
-                key={key}
-                handleSets={handleSets}
-                handleVolume={handleVolume}
+                key={index}
+                index={index}
+                handleDeleteItem={handleDeleteItem}
+                updateExerciseData={updateExerciseData}
               />
             );
           })
@@ -70,8 +114,11 @@ const WorkoutContent = ({ item, handleSets, handleVolume }) => {
         </FontComponent>
       </Pressable>
       <Pressable
-        className="w-full h-10 items-center justify-center rounded-lg text-gray-400 flex-row mb-5"
+        className={`w-full h-10 items-center justify-center rounded-lg text-gray-400 flex-row mb-5 ${
+          count === 0 ? "hidden" : "block"
+        }`}
         style={GlobalStyles.bgColor}
+        onPress={endWorkoutAlert}
       >
         <FontComponent className="text-red-500 text-lg">
           End Workout

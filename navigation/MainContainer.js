@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  DarkTheme,
+  NavigationContainer,
+  useRoute,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
@@ -8,12 +12,11 @@ import Settings from "../screens/Settings";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Welcome from "../screens/Welcome";
 import Login from "../screens/Login";
-import Mental from "../screens/Mental";
-import Physical from "../screens/Physical";
 import Exercises from "../screens/Exercises";
 import MapScreen from "../screens/MapScreen";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { themeColor } from "../global/GlobalStyles";
+import GlobalStyles, { themeColor } from "../global/GlobalStyles";
+import Tools from "../screens/Tools";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,8 +31,7 @@ function MainStack() {
       <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="TabNavigation" component={TabNavigation} />
-      <Stack.Screen name="Mental" component={Mental} />
-      <Stack.Screen name="Physical" component={Physical} />
+      <Stack.Screen name="Tools" component={Tools} />
       <Stack.Screen name="Exercises" component={Exercises} />
       <Stack.Screen name="Map" component={MapScreen} />
     </Stack.Navigator>
@@ -37,8 +39,12 @@ function MainStack() {
 }
 
 function TabNavigation() {
+  const route = useRoute();
   return (
     <Tab.Navigator
+      sceneContainerStyle={{
+        backgroundColor: GlobalStyles.darkContainer.backgroundColor,
+      }}
       initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -75,7 +81,11 @@ function TabNavigation() {
       })}
     >
       <Tab.Screen name="Workout" component={Workout} />
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        initialParams={{ username: route.params.username }}
+      />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
@@ -83,7 +93,7 @@ function TabNavigation() {
 
 export default function Navigation() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <MainStack />
     </NavigationContainer>
   );

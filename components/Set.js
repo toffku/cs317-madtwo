@@ -5,56 +5,79 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GlobalStyles from "../global/GlobalStyles";
 import DeleteIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import FontComponent from "./FontComponent";
 
-const Set = ({ index, handleDelete, handleVolume, handleSets }) => {
-  const [checked, setChecked] = useState(false);
-  const [volumeChange, setVolumeChange] = useState();
-  const [setChange, setSetChange] = useState();
+const Set = ({
+  index,
+  handleDelete,
+  handleVolumeChange,
+  handleSetChecked,
+  set,
+}) => {
+  const [isChecked, setIsChecked] = useState(set.isChecked);
+  const [volume, setVolume] = useState(set.volume);
+  const [weight, setWeight] = useState("");
+  const [reps, setReps] = useState("");
 
-  const handleChecked = () => {
-    setChecked(!checked);
-    const volume = volumeChange ? Number(volumeChange) : 0;
-    const sets = setChange ? Number(setChange) : 0;
-    handleSets(sets);
-    handleVolume(volume);
+  useEffect(() => {
+    if (handleVolumeChange) {
+      const weightNum = parseFloat(weight);
+      const repsNum = parseInt(reps);
+      const newVolume =
+        isNaN(weightNum) || isNaN(repsNum) ? 0 : weightNum * repsNum;
+      setVolume(newVolume);
+      handleVolumeChange(index, newVolume);
+    }
+  }, [weight, reps]);
+
+  const handleCheckboxChange = () => {
+    const newCheckedState = !isChecked;
+    setIsChecked(newCheckedState);
+    handleSetChecked(index, newCheckedState);
   };
 
-  const handleVolumeChange = (text) => {
-    setVolumeChange(text);
+  const handleWeightInputChange = (text) => {
+    setWeight(text);
   };
-  const handleSetChange = (text) => {
-    setSetChange(text);
+
+  const handleRepInputChange = (text) => {
+    setReps(text);
   };
 
   return (
     <TouchableOpacity
       className="w-full px-6 py-3 mb-3 rounded-lg flex-row justify-between items-center"
-      style={checked ? GlobalStyles.checked : GlobalStyles.bgColor}
-      onPress={handleChecked}
+      style={isChecked ? GlobalStyles.checked : GlobalStyles.bgColor}
+      onPress={handleCheckboxChange}
     >
       <FontComponent bold={true} className="text-white text-lg font-semibold">
         {index + 1}
       </FontComponent>
-      <View className="bg-black px-3 py-2 justify-center items-center rounded-lg">
+      <View
+        className="px-3 py-2 justify-center items-center rounded-lg"
+        style={{ backgroundColor: GlobalStyles.darkContainer.backgroundColor }}
+      >
         <TextInput
           className="text-lg font-semibold text-center"
           style={GlobalStyles.themeText}
           keyboardType="numeric"
           maxLength={3}
-          onChangeText={handleVolumeChange}
+          onChangeText={handleWeightInputChange}
         />
       </View>
-      <View className="bg-black px-3 py-2 justify-center items-center rounded-lg placeholder:justify-center">
+      <View
+        className=" px-3 py-2 justify-center items-center rounded-lg placeholder:justify-center"
+        style={{ backgroundColor: GlobalStyles.darkContainer.backgroundColor }}
+      >
         <TextInput
           className="text-lg font-semibold text-center"
           keyboardType="numeric"
           maxLength={2}
-          onChangeText={handleSetChange}
           style={GlobalStyles.themeText}
+          onChangeText={handleRepInputChange}
         />
       </View>
       <Pressable

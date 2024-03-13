@@ -29,7 +29,7 @@ const Settings = () => {
     },
     {
       key: 3,
-      name: "Units",
+      name: "Customise",
       icon: "edit-2",
     },
     {

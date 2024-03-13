@@ -1,35 +1,65 @@
-import {
-  View,
-  Text,
-  Pressable,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
-import React, { useState } from "react";
+import { View, Pressable } from "react-native";
+import React, { useEffect, useState } from "react";
 import Set from "./Set";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import GlobalStyles, { themeColor } from "../global/GlobalStyles";
+import GlobalStyles from "../global/GlobalStyles";
 import FontComponent from "./FontComponent";
 
-const WorkoutItem = ({ exercise, handleSets, handleVolume }) => {
-  const [sets, setSets] = useState([1]);
+import WorkoutPopUp from "./WorkoutPopUp";
+
+const WorkoutItem = ({
+  exercise,
+  handleDeleteItem,
+  updateExerciseData,
+  index,
+}) => {
+  const [sets, setSets] = useState([{ volume: 0, isChecked: false }]);
   const addSet = () => {
-    setSets([...sets, {}]); // Add an empty object to represent a new set
+    setSets([...sets, { volume: 0, isChecked: false }]);
   };
 
-  const handleDelete = (index) => {
-    setSets((prevSets) => prevSets.filter((set, i) => i !== index));
+  const handleDeleteSet = (index) => {
+    setSets((prevSets) => prevSets.filter((_, i) => i !== index));
+  };
+
+  // * Stats logic
+  useEffect(() => {
+    // Update exercise data whenever sets change
+    const itemSets = sets.filter((set) => set.isChecked).length;
+    const itemVolume = sets.reduce((totalVolume, set) => {
+      const volumeToAdd = set.isChecked ? parseFloat(set.volume) : 0;
+      return totalVolume + volumeToAdd;
+    }, 0);
+    const itemData = {
+      volume: itemVolume,
+      sets: itemSets,
+    };
+    updateExerciseData(index, itemData);
+  }, [sets]);
+
+  const handleSetChecked = (index, isChecked) => {
+    setSets((prevSets) => {
+      const updatedSets = [...prevSets];
+      updatedSets[index].isChecked = isChecked;
+      return updatedSets;
+    });
+  };
+
+  const handleVolumeChange = (index, volume) => {
+    setSets((prevSets) => {
+      const updatedSets = [...prevSets];
+      updatedSets[index].volume = volume;
+      return updatedSets;
+    });
   };
 
   return (
     <View className="w-full flex-1 ">
       <View className="w-full p-5 flex-row justify-between items-center">
-        <FontComponent bold={true} className="text-white text-xl">
+        <FontComponent bold={true} className="text-white text-xl w-3/4">
           {exercise.name}
         </FontComponent>
-        <TouchableOpacity>
-          <Ionicons name="ellipsis-vertical" size={25} color={themeColor} />
-        </TouchableOpacity>
+        <WorkoutPopUp handleDeleteItem={handleDeleteItem} />
       </View>
       <View className="w-[90%] px-5 py-1 mb-3 rounded-lg flex-row justify-between items-center">
         <FontComponent className="text-white text-[12px]">Set</FontComponent>
@@ -45,9 +75,10 @@ const WorkoutItem = ({ exercise, handleSets, handleVolume }) => {
           <Set
             key={index}
             index={index}
-            handleDelete={handleDelete}
-            handleSets={handleSets}
-            handleVolume={handleVolume}
+            set={set}
+            handleDelete={handleDeleteSet}
+            handleSetChecked={handleSetChecked}
+            handleVolumeChange={handleVolumeChange}
           />
         ))}
       </View>
