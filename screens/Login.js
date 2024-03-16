@@ -8,7 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import React, { useState } from "react";
-import GlobalStyles from "../GlobalStyles";
+import GlobalStyles from "../global/GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const Login = () => {
@@ -19,7 +19,7 @@ const Login = () => {
   let uname = "JFM04";
 
   const handlePress = () => {
-    if (password === pword && username === uname) {
+    if (password === pword && username.trim() === uname) {
       navigation.navigate("TabNavigation");
     }
   };

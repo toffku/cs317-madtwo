@@ -1,4 +1,5 @@
 import React from "react";
+import GlobalStyles from "../global/GlobalStyles";
 
 import {
   View,
@@ -8,7 +9,6 @@ import {
   SafeAreaView,
   StyleSheet,
 } from "react-native";
-import GlobalStyles from "../GlobalStyles";
 import Header from "../components/Header";
 import HomeContent from "../components/HomeContent";
 
