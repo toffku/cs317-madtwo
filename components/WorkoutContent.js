@@ -65,6 +65,7 @@ const WorkoutContent = ({ item, getData, startTimer, handleEndWorkout }) => {
         onPress: () => {
           handleEndWorkout(); // Call the handleEndWorkout function
           setExercises([]); // Clear the exercises array
+          setCount(0);
         },
       },
       {

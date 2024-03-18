@@ -12,6 +12,7 @@ import GlobalStyles from "../global/GlobalStyles";
 import Searchbar from "../components/Searchbar";
 import ExerciseList from "../components/ExerciseList";
 import FontComponent from "../components/FontComponent";
+import { useNavigation } from "@react-navigation/native";
 
 const Exercises = () => {
   const [error, setError] = useState(null);
@@ -19,6 +20,7 @@ const Exercises = () => {
   const [data, setData] = useState([]);
   const [input, setInput] = useState("");
   const [showExerciseList, setShowExerciseList] = useState(false);
+  const navigation = useNavigation();
 
   const fetchData = useCallback(async () => {
     if (!input) {
@@ -81,6 +83,12 @@ const Exercises = () => {
 
   return (
     <SafeAreaView style={GlobalStyles.darkContainer}>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        className=" w-20 h-10 ml-5"
+      >
+        <FontComponent style={GlobalStyles.themeText}>Cancel</FontComponent>
+      </TouchableOpacity>
       <View className="w-full h-20 justify-center items-center ">
         <FontComponent className="text-white text-2xl" bold={true}>
           Choose an exercise

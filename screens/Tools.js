@@ -45,14 +45,15 @@ const Tools = () => {
         <TouchableOpacity
           className="w-full h-[45%] items-center justify-center rounded-xl"
           style={GlobalStyles.bgColor}
+          onPress={() => navigation.navigate("Accelerometer")}
         >
-          <Icon name="speedometer" size={80} color={themeColor} />
+          <Icon name="rotate-orbit" size={80} color={themeColor} />
           <FontComponent
             style={GlobalStyles.themeText}
-            className="text-2xl"
+            className="text-2xl mt-4"
             bold={true}
           >
-            Measure Speed
+            Accelerometer Tool
           </FontComponent>
         </TouchableOpacity>
       </View>

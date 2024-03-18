@@ -11,7 +11,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import GlobalStyles, { themeColor } from "../global/GlobalStyles";
 import FontComponent from "./FontComponent";
 
-const WorkoutPopUp = ({ handleDeleteItem, key }) => {
+const WorkoutPopUp = ({ handleDeleteItem, key, toggleModal }) => {
   return (
     <View className="flex-1 items-end justify-center">
       <Menu>
@@ -36,6 +36,7 @@ const WorkoutPopUp = ({ handleDeleteItem, key }) => {
                 alignItems: "center",
               },
             }}
+            onSelect={toggleModal}
           >
             <FontComponent className="text-white">Details</FontComponent>
           </MenuOption>
