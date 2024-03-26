@@ -19,7 +19,7 @@ const Home = () => {
   const workoutCount = route.params?.workouts;
   const name = route.params?.username;
   const newUsername = route.params?.newUsername;
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   const toggleModal = () => {
     setOpenModal(!openModal);
@@ -32,6 +32,7 @@ const Home = () => {
         workoutCount={workoutCount}
         name={name}
         newUsername={newUsername}
+        toggleDivisionModal={toggleModal}
       />
       <HomeContent />
     </SafeAreaView>

@@ -32,6 +32,7 @@ const Tools = () => {
         <TouchableOpacity
           className="w-full h-[45%] items-center justify-center rounded-xl"
           style={GlobalStyles.bgColor}
+          onPress={() => navigation.navigate("BenchIncline")}
         >
           <Icon name="angle-acute" size={80} color={themeColor} />
           <FontComponent
@@ -47,13 +48,13 @@ const Tools = () => {
           style={GlobalStyles.bgColor}
           onPress={() => navigation.navigate("Accelerometer")}
         >
-          <Icon name="rotate-orbit" size={80} color={themeColor} />
+          <Icon name="scale-unbalanced" size={80} color={themeColor} />
           <FontComponent
             style={GlobalStyles.themeText}
             className="text-2xl mt-4"
             bold={true}
           >
-            Accelerometer Tool
+            Balance
           </FontComponent>
         </TouchableOpacity>
       </View>

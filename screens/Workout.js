@@ -68,7 +68,7 @@ const Workout = () => {
 
   return (
     <View style={GlobalStyles.darkContainer}>
-      <Modal visible={modalOpen} animationType="slide">
+      <Modal visible={modalOpen} animationType="slide" statusBarTranslucent>
         <View style={GlobalStyles.darkContainer}>
           <View className="w-full h-full p-5 items-center justify-between">
             <FontComponent className="text-3xl text-white" bold={true}>

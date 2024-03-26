@@ -1,15 +1,22 @@
-import React from "react";
-import MapView from "react-native-maps";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import GlobalStyles, { themeColor } from "../global/GlobalStyles";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  Platform,
+  Linking,
+} from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
+import GlobalStyles, { themeColor } from "../global/GlobalStyles";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontComponent from "./FontComponent";
 
 const HomeContent = () => {
   const navigation = useNavigation();
+
   const handleTools = () => {
     navigation.navigate("Tools");
   };
@@ -17,9 +24,9 @@ const HomeContent = () => {
   const handleMap = () => {
     navigation.navigate("Map");
   };
+
   return (
-    <View className="flex-1 px-5  justify-end">
-      {/* Map */}
+    <View className=" px-5 justify-end">
       <TouchableOpacity
         className="w-full h-24 rounded-lg mb-4 p-3 justify-around items-center"
         style={GlobalStyles.bgColor}
@@ -44,7 +51,7 @@ const HomeContent = () => {
           color={themeColor}
           size={40}
         />
-        <FontComponent className=" text-[12px]" style={GlobalStyles.themeText}>
+        <FontComponent className="text-[12px]" style={GlobalStyles.themeText}>
           Tools
         </FontComponent>
       </TouchableOpacity>

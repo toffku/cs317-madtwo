@@ -7,23 +7,20 @@ import Logo from "./Logo";
 import FontComponent from "./FontComponent";
 import WorkoutCounter from "./WorkoutCounter";
 import Bronze from "./svgs/Bronze";
-import Silver from "./svgs/Silver";
-import Gold from "./svgs/Gold";
-import Iridescent from "./svgs/Iridescent";
-import Crismon from "./svgs/Crimson";
 
-const Header = ({ workoutCount, name, newUsername }) => {
+const Header = ({ workoutCount, name, newUsername, toggleDivisionModal }) => {
   const [username, setUsername] = useState("");
 
   useEffect(() => {
     setUsername(name);
-  }, [name]);
+  }, []);
 
   useEffect(() => {
     if (newUsername) {
       setUsername(newUsername);
     }
   }, [newUsername]);
+
   return (
     <View className="flex-1 mb-36">
       {/* Logo */}
@@ -46,23 +43,9 @@ const Header = ({ workoutCount, name, newUsername }) => {
             </FontComponent>
           </View>
           <View>
-            {/* <Image
-              source={require("../assets/images/iridescent.png")}
-              style={{
-                width: 50,
-                height: 50,
-                resizeMode: "contain",
-              }}
-            />
-            <Image
-              source={require("../assets/images/master.png")}
-              style={{
-                width: 50,
-                height: 50,
-                resizeMode: "contain",
-              }}
-            />
-            <Bronze width={40} height={40} /> */}
+            <TouchableOpacity onPress={toggleDivisionModal}>
+              <Bronze width={40} height={40} />
+            </TouchableOpacity>
           </View>
         </View>
         <WorkoutCounter workoutCount={workoutCount} />

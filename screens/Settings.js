@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   Modal,
   TextInput,
+  Button,
+  Alert,
 } from "react-native";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -18,11 +20,42 @@ import FontComponent from "../components/FontComponent";
 
 const Settings = () => {
   const navigation = useNavigation();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [usernameModalOpen, setUsernameModalOpen] = useState(false);
   const [newUsername, setNewUsername] = useState("");
+  const [showFAQ, setShowFAQ] = useState(false); // State to toggle FAQ display
+  const [modalVisible, setModalVisible] = useState(false); // State to toggle modal visibility
+
   const toggleModal = () => {
-    setModalOpen(!modalOpen);
+    setUsernameModalOpen(!usernameModalOpen);
   };
+
+  const handleAboutPress = () => {
+    // Show a welcome message when the user clicks on "About"
+    Alert.alert(
+      "Welcome to Our Fitness App!",
+      "We are excited to have you here. Our app is designed to help you achieve your fitness goals. Stay active and healthy!",
+      [
+        {
+          text: "Got it",
+          onPress: () => console.log("Welcome message dismissed"),
+        },
+      ]
+    );
+  };
+
+  const handleNotificationsPress = () => {
+    Alert.alert("", "Allow notifications?", [
+      {
+        text: "Yes",
+        onPress: () => console.log("Notifications enabled"),
+      },
+      {
+        text: "No",
+        onPress: () => console.log("Notifications dismissed"),
+      },
+    ]);
+  };
+
   const settingsArr = [
     {
       key: 1,
@@ -34,6 +67,7 @@ const Settings = () => {
       key: 2,
       name: "Notifications",
       icon: "bell",
+      onPressFunction: handleNotificationsPress,
     },
     {
       key: 3,
@@ -49,16 +83,51 @@ const Settings = () => {
       key: 5,
       name: "FAQ",
       icon: "message-square",
+      onPressFunction: () => setShowFAQ(!showFAQ), // Toggle FAQ display
     },
     {
       key: 6,
       name: "About",
       icon: "info",
+      onPressFunction: handleAboutPress,
     },
     {
       key: 7,
       name: "Feedback",
       icon: "message-circle",
+    },
+  ];
+
+  const faqQuestions = [
+    {
+      question: "How often should I work out?",
+      answer:
+        "It's recommended to exercise at least 3-4 times a week for optimal results.",
+    },
+    {
+      question: "What's the best time to work out?",
+      answer:
+        "The best time varies based on individual preferences. Consider morning, afternoon, or evening workouts.",
+    },
+    {
+      question: "Cardio or strength training?",
+      answer:
+        "Both! Cardio improves heart health, while strength training builds muscle and boosts metabolism.",
+    },
+    {
+      question: "How long should my workouts be?",
+      answer:
+        "Aim for 30-60 minutes per session, focusing on quality and proper form.",
+    },
+    {
+      question: "How do I prevent muscle soreness after a workout?",
+      answer:
+        "Stretching: Perform dynamic stretches before your workout and static stretches afterward.",
+    },
+    {
+      question: "How can I stay motivated to exercise regularly?",
+      answer:
+        "You should set goals on what you want to achieve, make sure to add variety in your workout, and find someone to go with!",
     },
   ];
 
@@ -72,7 +141,12 @@ const Settings = () => {
         <View className="w-full h-20 items-center justify-center">
           <Logo logoStyle={GlobalStyles.smallLogo} width={24} height={24} />
         </View>
-        <Modal visible={modalOpen} transparent={true} animationType="fade">
+        {/* Username Modal */}
+        <Modal
+          visible={usernameModalOpen}
+          transparent={true}
+          animationType="fade"
+        >
           <View
             style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
             className="flex-1 items-center justify-center px-5"
@@ -117,18 +191,45 @@ const Settings = () => {
             </View>
           </View>
         </Modal>
-        {settingsArr.map(({ name, key, icon, onPressFunction }) => {
-          return (
+
+        {showFAQ ? (
+          <View>
+            <FontComponent className="text-white font-bold text-lg mt-4 ml-4">
+              Frequently Asked Questions
+            </FontComponent>
+            {faqQuestions.map(({ question, answer }) => (
+              <View key={question} className="mt-2 px-10">
+                <FontComponent className="text-white" bold={true}>
+                  {question}
+                </FontComponent>
+                <FontComponent className="text-white">{answer}</FontComponent>
+              </View>
+            ))}
             <TouchableOpacity
-              key={key}
-              className="w-full h-14 items-center px-10 mt-2 flex-row"
-              onPress={onPressFunction}
+              className="mt-4 ml-4"
+              onPress={() => setShowFAQ(false)} // Back arrow to hide FAQ
             >
-              <Feather name={icon} size={20} color="white" />
-              <FontComponent className="px-4 text-white">{name}</FontComponent>
+              <Feather name="arrow-left" size={20} color="white" />
             </TouchableOpacity>
-          );
-        })}
+          </View>
+        ) : (
+          <>
+            {settingsArr.map(({ name, key, icon, onPressFunction }) => {
+              return (
+                <TouchableOpacity
+                  key={key}
+                  className="w-full h-14 items-center px-10 mt-2 flex-row"
+                  onPress={onPressFunction}
+                >
+                  <Feather name={icon} size={20} color="white" />
+                  <FontComponent className="px-4 text-white">
+                    {name}
+                  </FontComponent>
+                </TouchableOpacity>
+              );
+            })}
+          </>
+        )}
       </View>
     </SafeAreaView>
   );

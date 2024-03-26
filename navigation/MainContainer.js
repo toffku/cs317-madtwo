@@ -18,6 +18,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import GlobalStyles, { themeColor } from "../global/GlobalStyles";
 import Tools from "../screens/Tools";
 import AccelerometerScreen from "../screens/AccelerometerScreen";
+import BenchIncline from "../screens/BenchInclineScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +35,7 @@ function MainStack() {
       <Stack.Screen name="TabNavigation" component={TabNavigation} />
       <Stack.Screen name="Tools" component={Tools} />
       <Stack.Screen name="Accelerometer" component={AccelerometerScreen} />
+      <Stack.Screen name="BenchIncline" component={BenchIncline} />
       <Stack.Screen name="Exercises" component={Exercises} />
       <Stack.Screen name="Map" component={MapScreen} />
     </Stack.Navigator>
